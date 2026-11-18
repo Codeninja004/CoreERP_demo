@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html, body, #root { height: 100%; }
+  body { @apply bg-surface text-ink-900 antialiased; font-feature-settings: 'cv11', 'ss01', 'tnum' 0; }
+  .tnum { font-variant-numeric: tabular-nums; }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #D6D9DD; border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+  ::-webkit-scrollbar-thumb:hover { background-color: #B5B9C0; }
+  input[type='date']::-webkit-calendar-picker-indicator { opacity: .55; cursor: pointer; }
+}
+@layer components {
+  .input { @apply h-9 w-full rounded-lg border border-line bg-white px-3 text-sm text-ink-900 placeholder:text-ink-400 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-100 disabled:bg-surface disabled:text-ink-500; }
+  .input-error { @apply border-red-400 focus:border-red-500 focus:ring-red-100; }
+  .th { @apply px-3 py-2.5 text-left text-2xs font-semibold uppercase tracking-wide text-ink-500 whitespace-nowrap; }
+  .td { @apply px-3 py-2.5 text-sm text-ink-800 whitespace-nowrap; }
+}
+@keyframes toast-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.toast-in { animation: toast-in .18s ease-out; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.fade-in { animation: fade-in .12s ease-out; }
+@keyframes pop-in { from { opacity: 0; transform: translateY(6px) scale(.99); } to { opacity: 1; transform: none; } }
+.pop-in { animation: pop-in .16s ease-out; }
+
+@media print {
+  @page { margin: 14mm; }
+  body:has(.print-area) * { visibility: hidden !important; }
+  body:has(.print-area) .print-area, body:has(.print-area) .print-area * { visibility: visible !important; }
+  body:has(.print-area) .print-area { position: absolute !important; inset: 0 auto auto 0 !important; width: 100% !important; box-shadow: none !important; border: none !important; }
+  .no-print { display: none !important; }
+  body { background: white !important; }
+}
